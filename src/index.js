@@ -1,7 +1,7 @@
 import app from './app'
 import { Server as websocketServer } from 'socket.io'
 import http from 'http'
-
+import sockets from './sockets'
 import { connectDB } from './db'
 
 connectDB();
@@ -11,4 +11,4 @@ const httpServer = server.listen(3000)
 const io = new websocketServer(httpServer)
 
 console.log('server is running on port 3000')
-
+sockets(io)
