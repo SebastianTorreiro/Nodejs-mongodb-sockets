@@ -1,20 +1,23 @@
-import Note from './models/Note'
+import Note from "./models/Note";
 
+export default (io) => {
+  io.on("connection", (socket) => {
+    const emitNotes = async () => {
+      const notes = await Note.find();
+      io.emit("server:loadNotes", notes);
+    };
+    emitNotes();
 
-export default (io) =>{
+    socket.on("client:newnote", async (data) => {
+    const newNote =new Note(data);
+    const savedNote = await newNote.save()
+    io.emit('server:newnote', savedNote)
+    });
 
-    io.on('connection', (socket)=>{
-        const emitNotes = async () =>{
-            const notes = await Note.find()
-            io.emit('loadNotes', notes)
-        } 
-        emitNotes()
-        
-    socket.on('newnote', data =>{
-        console.log(data)
+    socket.on('client:deletenote', async (id)=>{
+    const deleteNote = await Note.findByIdAndDelete(id)
+    emitNotes();
+
     })
-
-    })
-
-
-}
+  });
+};
