@@ -12,7 +12,7 @@ const noteUI = note =>{
   div.innerHTML += `
   <div>
     <h1>${note.title}</h1>
-    <p>${note.title}</p>
+    <p>${note.description}</p>
     <button class="delete" data-id="${note._id}">Delete</button>
     <button class="update" data-id="${note._id}">Update</button>
   </div>
@@ -20,8 +20,8 @@ const noteUI = note =>{
   const btnDelete = div.querySelector(".delete")
   const btnupdate = div.querySelector('.update')
   
-  btnDelete.addEventListener("click", e => deleteNote(btnDelete.dataset.id))
-  btnupdate.addEventListener('click', e => getNoteById(btnupdate.dataset.id))
+  btnDelete.addEventListener("click", () => deleteNote(btnDelete.dataset.id))
+  btnupdate.addEventListener('click', () => getNoteById(btnupdate.dataset.id))
 
   return div
 }
