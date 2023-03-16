@@ -28,7 +28,7 @@ export const onSelected = callback =>{
 
 export const updateNote = (id, title, description) =>{
     socket.emit('client:updatenote',{
-      id,
+      _id: id,
       title,
       description,
     });

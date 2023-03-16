@@ -48,6 +48,9 @@ export const onHandleSubmit = (e) =>{
     }else{
     saveNotes(title.value, description.value);
     }
+    saveId= '';
+    title.value = '';
+    description.value= '';
 }
 
 export const appendNote = (note) =>{
